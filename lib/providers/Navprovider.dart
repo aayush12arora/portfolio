@@ -10,6 +10,15 @@ class NavController extends GetxController{
    List _onpage =[false,false,false,false,];
 List get fio=>_isHovering;
    List get fit=>_onpage;
+
+   void alf(){
+      for(int i=0;i<_isHovering.length;i++){
+         _isHovering[i]=false;
+         _onpage[i]=false;
+         update();
+      }
+   }
+
 void change(int k){
   for(int i =0;i<_isHovering.length;i++){
      if(i==k){

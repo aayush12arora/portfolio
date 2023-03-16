@@ -23,24 +23,10 @@ class _AppBarrState extends State<AppBarr> {
   void initState() {
     // TODO: implement initState
 widget.scrollController.addListener(() {
-  if(widget.scrollController.offset<widget.scrsize){
-    setState(() {
-      _isHovering[0] = false; // set hover state to true
-      _onpage[0] = false;
-
-      //------------
-      _isHovering[2] = false; // set hover state to true
-      _onpage[2] = false;
-      //----------
-      _isHovering[1] = false; // set hover state to true
-      _onpage[1] = false;
-      //------------
-      _isHovering[3] = false; // set hover state to true
-      _onpage[3] = false;
-      //--------
-    });
+  if(widget.scrollController.offset<widget.scrsize*0.9){
+   controller.alf();
   }
- if(widget.scrollController.offset>=widget.scrsize&&widget.scrollController.offset<widget.scrsize*2){
+ if(widget.scrollController.offset>=widget.scrsize*0.9&&widget.scrollController.offset<widget.scrsize*2){
 
 
    controller.change(0);
