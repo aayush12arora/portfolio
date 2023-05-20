@@ -2,80 +2,66 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
-class Projects extends StatefulWidget {
-const Projects({Key? key}) : super(key: key);
+class MobProjects extends StatefulWidget {
+  const MobProjects({Key? key}) : super(key: key);
 
-@override
-State<Projects> createState() => _ProjectsState();
+  @override
+  State<MobProjects> createState() => _MobProjectsState();
 }
 
-class _ProjectsState extends State<Projects> {
-
-
-
-  Future<String> getDataFromFirebase(String collection, String docum) async {
-    DocumentSnapshot<Map<String, dynamic>> snapshot =
-    await FirebaseFirestore.instance.collection(collection).doc(docum).get();
-
-    if (snapshot.exists) {
-      final data = snapshot.data();
-      final yourData = data!['wh'] as String?;
-      return yourData ?? 'No data available';
-    } else {
-      return 'No data found';
-    }
-  }
+class _MobProjectsState extends State<MobProjects> {
   List<bool> isHovered = [false, false, false];
-List< double>big =[1.0 ,1.0,1.0];
-List<Color> given =[Colors.indigo.shade50,Colors.indigo.shade50,Colors.indigo.shade50,];
-Color ele = Colors.indigo.shade50;
-Color elev = Colors.grey.shade400;
-@override
-Widget build(BuildContext context) {
-  List<String>urls=['https://github.com/aayush12arora/ISC-Slot-Booking-App.git','https://github.com/aayush12arora/Crypto-Currency-Tracker.git','https://github.com/aayush12arora/lets_build___.git'];
-  List<String> project =['Gym Slot Booking App','Crypto Tracker ','Import/Export '];
-  List<String> projectdes =['Gym Slot Booking App','Crypto Tracker ','Import/Export '];
-  List<String> projectrw =['Android and Backend','Flutter - Dart REST API ','Flutter - Dart and FireBase'];
-  var screenSize = MediaQuery.of(context).size;
-  return Stack(
+  List< double>big =[1.0 ,1.0,1.0];
+  List<Color> given =[Colors.indigo.shade50,Colors.indigo.shade50,Colors.indigo.shade50,];
+  Color ele = Colors.indigo.shade50;
+  Color elev = Colors.grey.shade400;
+  @override
+  Widget build(BuildContext context) {
+    List<String>urls=['https://github.com/aayush12arora/ISC-Slot-Booking-App.git','https://github.com/aayush12arora/Crypto-Currency-Tracker.git','https://github.com/aayush12arora/lets_build___.git'];
+    List<String> project =['Gym Slot Booking App','Crypto Tracker ','Import/Export '];
+    List<String> projectdes =['Gym Slot Booking App','Crypto Tracker ','Import/Export '];
+    List<String> projectrw =['Android and Backend','Flutter - Dart REST API ','Flutter - Dart and FireBase'];
+    var screenSize = MediaQuery.of(context).size;
+    return Stack(
 
-    children: [ Container(
-       color:  Colors.white,
-      height: screenSize.height,
-      width: screenSize.width,
+      children: [ Container(
+        color:  Colors.white,
+        height: screenSize.height,
+        width: screenSize.width,
 
-    ),
-      Center(
-        child: Container(
+      ),
+        Container(
           margin: EdgeInsets.only(
             top: screenSize.height*0.2,
-           // left: screenSize.width*0.1,
+            // left: screenSize.width*0.1,
           ),
           padding: EdgeInsets.only(bottom: screenSize.height*0.1),
           //  color: Colors.indigo.shade50,
           child: Column(
             children: [
               Row(
-
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width:screenSize.width*0.4,
-                  ),
-                  Container(
-                    // margin: EdgeInsets.only(
-                    //   left: screenSize.width*0.35,
-                    //
-                    // ),
-                      padding: EdgeInsets.only(bottom: 4),
-                      child: Icon(Icons.computer,size: 57,)),
-                  SizedBox(
-                    width:screenSize.width*0.01,
-                  ),
-                  Text('Projects',style: TextStyle(fontSize: 43,fontWeight: FontWeight.bold,color: Colors.black),),
-                  SizedBox(
-                    width:screenSize.width*0.01,
-                  ),
-                  Text('Made',style: TextStyle(fontSize: 43,fontWeight: FontWeight.bold,color: Colors.yellow.shade900,))
+                  Row(
+                    children: [
+                      Container(
+
+                          padding: EdgeInsets.only(bottom: 4),
+                          child: Icon(Icons.computer,size: 24,)),
+                      SizedBox(
+                        width:screenSize.width*0.01,
+                      ),
+                      Text('Projects',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.black),),
+                      SizedBox(
+                        width:screenSize.width*0.01,
+                      ),
+                      Text('Made',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.yellow.shade900,))
+                    ],
+                  )
+
+
+
+
                 ],
               ),
               SizedBox(
@@ -90,11 +76,11 @@ Widget build(BuildContext context) {
                       List<DocumentSnapshot> documents = snapshot.data!.docs;
                       return GridView.count(
 
-                       // physics: NeverScrollableScrollPhysics(),
-                        crossAxisCount: 3,
+                        physics: NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
                         padding: EdgeInsets.all(20.0),
-                        crossAxisSpacing: MediaQuery.of(context).size.width * 0.02,
-                        mainAxisSpacing: MediaQuery.of(context).size.width * 0.01,
+                        crossAxisSpacing: screenSize.width*0.05,
+                        mainAxisSpacing: screenSize.height*0.07,
                         shrinkWrap: true, // Set shrinkWrap to true
                         scrollDirection: Axis.vertical
                         ,
@@ -135,14 +121,16 @@ Widget build(BuildContext context) {
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 27,
+                                      fontSize: 13,
                                     ),
                                   ),
                                   SizedBox(height: 10.0),
                                   Container(
-                                    width: screenSize.width / 5,
-                                    height: screenSize.height / 10,
+                                    width: screenSize.width/3,
+                                    height: screenSize.height/10,
+
                                     padding: EdgeInsets.all(8),
+
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(22),
@@ -167,14 +155,12 @@ Widget build(BuildContext context) {
                   },
                 ),
               ),
-
               //Text('hell',style: TextStyle(fontSize: 36),)
             ],
           ),
-        ),
-      )
+        )
 
-    ],
-  );
-}
+      ],
+    );
+  }
 }

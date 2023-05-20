@@ -24,7 +24,7 @@ class _AppBarrState extends State<AppBarr> {
     // TODO: implement initState
 widget.scrollController.addListener(() {
   if(widget.scrollController.offset<widget.scrsize*0.9){
-   controller.alf();
+   //controller.alf();
   }
  if(widget.scrollController.offset>=widget.scrsize*0.9&&widget.scrollController.offset<widget.scrsize*2){
 
@@ -64,7 +64,10 @@ widget.scrollController.addListener(() {
               ),
               InkWell(
                   onTap: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                    setState(() {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                    });
+
 
                   },
                   child: Text('Aayush Arora',style: TextStyle(color: Colors.black87,fontSize: 26,fontFamily: 'Raleway',fontWeight: FontWeight.w900,letterSpacing: 3),)),

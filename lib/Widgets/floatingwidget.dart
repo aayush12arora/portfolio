@@ -1,5 +1,13 @@
 
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:portfolio/Pages/Hire_me_Page.dart';
+
+import 'package:portfolio/providers/Navprovider.dart';
 import 'dart:html' as html;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,7 +26,32 @@ class FloatingQuickAccessBar extends StatefulWidget {
 }
 
 class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
+  var helloline="";
+  var intro_nameline="";
+  var role="";
 
+  Future<String> getDataFromFirebase(String collection, String docum) async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot =
+    await FirebaseFirestore.instance.collection(collection).doc(docum).get();
+
+    if (snapshot.exists) {
+      final data = snapshot.data();
+      final yourData = data!['wh'] as String?;
+      return yourData ?? 'No data available';
+    } else {
+      return 'No data found';
+    }
+  }
+
+
+
+
+
+
+
+
+  NavController controller = Get.find();
+  bool isSmallScreenVisible = false;
   final Uri _urigit = Uri.parse('https://github.com/aayush12arora');
   final Uri _urileet = Uri.parse('https://leetcode.com/aayush12arora/');
   final Uri _urilinked = Uri.parse('https://www.linkedin.com/in/aayush-arora-a86580217/');
@@ -31,6 +64,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
       throw Exception('Could not launch $_uri');
     }
   }
+
   _mailto() async {
     const url = 'mailto:aa373@snu.edu.in?subject=Product Inquiry&body=';
     print("test url1");
@@ -42,15 +76,31 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
       throw 'Could not launch $url';
     }
   }
-  Widget generateRowElements() {
 
 
+
+  Future<String> fetchData(String collection, String docum) async {
+    String result = await getDataFromFirebase(collection, docum);
+return result;
+  }
+
+
+
+
+
+  Future<Widget> generateRowElements  () async  {
+
+
+//getData();
       Widget elementTile = Row(
-        children:[Column(
+        children:[
+          //SizedBox(width: widget.screenSize.width*3/4,),
+
+          Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi There,',
+           await   fetchData("HomePage", "helloline") as String,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 41,
@@ -65,7 +115,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
             ),
             SizedBox(height: widget.screenSize.width/90,),
             Text(
-              "I'm Aayush Arora",
+              await   fetchData("HomePage", "intro_nameline") as String,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                   fontSize: 41,
@@ -80,15 +130,19 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
             ),
             SizedBox(height: widget.screenSize.width/55,),
             Row(
+
               children: [
                 Text("I am a ",style: TextStyle(color: Colors.black,fontSize: 26,fontWeight: FontWeight.w600),),
-                Text("Flutter Developer  !",style: TextStyle(color: Colors.purple.shade900,fontSize: 26,fontWeight: FontWeight.w600),),
+                Text(await   fetchData("HomePage", "role") as String,style: TextStyle(color: Colors.purple.shade900,fontSize: 26,fontWeight: FontWeight.w600),),
+                Text(" !",style: TextStyle(color: Colors.purple.shade900,fontSize: 26,fontWeight: FontWeight.w600),),
               ],
             ),
             SizedBox(height: widget.screenSize.width/55,),
             InkWell(
               onTap: (){
-                print('screen height ${widget.screenSize.height*0.9}');
+               Get.to(()=>ContactFormPage(0));
+               // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ContactFormPage()));
+                controller.toogle();
               },
               onHover: (value){},
               child: Container(
@@ -152,8 +206,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
                    html.window.open('https://github.com/aayush12arora',"_blank");
                   },
                   child: CircleAvatar(
-                    // child: Image.asset('assests/github.png'),
-//child: Image.asset('assets/linkedin.png'),
+
                     backgroundImage: ExactAssetImage('assets/github.png',),
                     minRadius: 20,
 
@@ -162,8 +215,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
 
                 SizedBox(width: widget.screenSize.width*0.01,),
                 CircleAvatar(
-                  // child: Image.asset('assests/github.png'),
-//child: Image.asset('assets/linkedin.png'),
+
                 child: IconButton(icon: Icon(Icons.mail_rounded), onPressed: () {
                   _mailto();
                 },),
@@ -195,6 +247,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
 
   @override
   Widget build(BuildContext context) {
+
     return Center(
       heightFactor: 1,
       child: Padding(
@@ -207,13 +260,29 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
                widget.screenSize.width / 12
 
         ),
-        child: Container(
-          child: Row(
-            children: [
-              generateRowElements(),
-            ],
-          ),
-        ),
+          child: Container(
+            child: Row(
+              children: [
+                FutureBuilder<Widget>(
+                  future: generateRowElements(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        // Handle error case
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      // Return the widget when the future is complete
+                      return snapshot.data ?? Container(); // Use a default widget or provide a fallback
+                    } else {
+                      // Show a loading indicator while the future is still loading
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ],
+            ),
+          )
+
       ),
     );
   }

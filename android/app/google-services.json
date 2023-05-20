@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "558522614201",
+    "project_id": "trytwo-a2eb2",
+    "storage_bucket": "trytwo-a2eb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558522614201:android:67c866663306b631a17668",
+        "android_client_info": {
+          "package_name": "com.example.portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558522614201-0javv96v5689c5ts8f5k7a7k6mrqfgo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf8S2gbCVyXa7hBBotd2-P1k1ylINGKDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558522614201-0javv96v5689c5ts8f5k7a7k6mrqfgo6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "558522614201-75vgtklutgmaf89mi4dorb3opsf2io8j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nerd.vpn.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

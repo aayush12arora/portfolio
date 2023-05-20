@@ -39,11 +39,7 @@ color: Colors.white,
           Padding(
             padding: EdgeInsets.only(
           top: screenSize.height * 0.06,
-              // left:
-              // screenSize.width / 7,
-              //
-              // right:
-              // screenSize.width / 12
+
 
           ),
             child: Container(

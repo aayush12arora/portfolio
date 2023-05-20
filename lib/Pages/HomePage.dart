@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:portfolio/Pages/About.dart';
 import 'package:portfolio/Pages/Education.dart';
 import 'package:portfolio/Pages/Projects.dart';
 import 'package:portfolio/Pages/Skills.dart';
+
 import 'package:portfolio/Widgets/AppBar.dart';
 import 'package:portfolio/Widgets/floatingwidget.dart';
+import 'package:portfolio/providers/Navprovider.dart';
 
 import '../Widgets/Menu_drawer.dart';
 import '../Widgets/abtappbar.dart';
@@ -17,6 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  FirebaseFirestore instan = FirebaseFirestore.instance;
   late  Animation<Offset> slideanimation;
   late AnimationController slideanimationcontroller;
   final ScrollController _scrollController = ScrollController();
@@ -47,11 +53,7 @@ print('screen height ${screenSize.height}');
 appBar: PreferredSize(
 
   preferredSize: Size(screenSize.width,70),
-  child: screenSize.width<1235?AppBar(
-    iconTheme: IconThemeData(color: Colors.black),
-    backgroundColor: Colors.white,
-    title: Text('Aayush Arora',style: TextStyle(color: Colors.black87,fontSize: 26,fontFamily: 'Raleway',fontWeight: FontWeight.w900,letterSpacing: 3),),
-  ) :AppBarr(scrollController: _scrollController,scrsize: screenSize.height,),
+  child: AppBarr(scrollController: _scrollController,scrsize: screenSize.height,),
 ),
       drawer: MenuDrawer(),
       body: SingleChildScrollView(
@@ -70,6 +72,24 @@ appBar: PreferredSize(
 
                   ),
                 ),
+                // GetBuilder<NavController>(
+                //   builder: (con){
+                //     return Visibility(
+                //         visible:false,
+                //         child: Container(
+                //             color: Colors.white,
+                //             width: MediaQuery.of(context).size.width*0.8,
+                //             height: MediaQuery.of(context).size.height*0.5,
+                //             child:ElevatedButton(
+                //               onPressed: () {
+                //                 con.toogle();
+                //               },
+                //               child: Text('close'),
+                //             ) // Your small screen UI here
+                //         ));
+                //   },
+                //
+                // ),
                 SlideTransition(
                    position: slideanimation,
                     child: FloatingQuickAccessBar(screenSize: screenSize)),
