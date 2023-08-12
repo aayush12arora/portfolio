@@ -247,17 +247,17 @@ return result;
 
   @override
   Widget build(BuildContext context) {
-
+    var screenSize = MediaQuery.of(context).size;
     return Center(
       heightFactor: 1,
       child: Padding(
         padding: EdgeInsets.only(
-          top: widget.screenSize.height * 0.15,
+          top: screenSize.height * 0.15,
           left:
-               widget.screenSize.width / 7,
+              screenSize.width / 7,
 
           right:
-               widget.screenSize.width / 12
+               screenSize.width / 12
 
         ),
           child: Container(

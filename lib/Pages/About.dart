@@ -78,15 +78,16 @@ padding: EdgeInsets.only(bottom: 4),
                       Container(
 
                       //  padding: EdgeInsets.all(16.0),
-                        width: screenSize.width * 0.23,
-                        height: screenSize.height*0.61,
+                        width: screenSize.width * 0.2,
+                        height: screenSize.height*0.575,
                         decoration: BoxDecoration(
+
     color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(100.0),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
-                              spreadRadius: 3,
+                              spreadRadius: 2,
                               blurRadius: 2,
                               // offset: Offset(3, 3), // changes position of shadow
                             ),
@@ -94,7 +95,7 @@ padding: EdgeInsets.only(bottom: 4),
                         ),
                         child: ClipRRect(
 
-                            borderRadius: BorderRadius.circular(15.0),
+                            borderRadius: BorderRadius.circular(100.0),
                             child: Image.asset('assets/about.jpg')),
                       ),
                       Container(

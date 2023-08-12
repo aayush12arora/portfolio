@@ -70,7 +70,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
 
           SizedBox(width: widget.screenSize.width/5,),
           CircleAvatar(
-            backgroundImage: ExactAssetImage('assets/biti.png',),
+            backgroundImage: ExactAssetImage('assets/favicon.png',),
             backgroundColor: Colors.pinkAccent.shade200,
             radius: widget.screenSize.height/4,
           )

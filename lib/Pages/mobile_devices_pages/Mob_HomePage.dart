@@ -93,24 +93,7 @@ class _MobHomePageState extends State<MobHomePage>
                       ),
                     ),
                   ),
-                  // GetBuilder<NavController>(
-                  //   builder: (con){
-                  //     return Visibility(
-                  //         visible:false,
-                  //         child: Container(
-                  //             color: Colors.white,
-                  //             width: MediaQuery.of(context).size.width*0.8,
-                  //             height: MediaQuery.of(context).size.height*0.5,
-                  //             child:ElevatedButton(
-                  //               onPressed: () {
-                  //                 con.toogle();
-                  //               },
-                  //               child: Text('close'),
-                  //             ) // Your small screen UI here
-                  //         ));
-                  //   },
-                  //
-                  // ),
+
                   SlideTransition(
                       position: slideanimation,
                       child: MobFloatingQuickAccessBar(screenSize: screenSize)),
