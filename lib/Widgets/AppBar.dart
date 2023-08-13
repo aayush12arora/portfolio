@@ -24,7 +24,7 @@ class _AppBarrState extends State<AppBarr> {
     // TODO: implement initState
 widget.scrollController.addListener(() {
   if(widget.scrollController.offset<widget.scrsize*0.9){
-   //controller.alf();
+   controller.alf();
   }
  if(widget.scrollController.offset>=widget.scrsize*0.9&&widget.scrollController.offset<widget.scrsize*2){
 
@@ -66,6 +66,7 @@ widget.scrollController.addListener(() {
                   onTap: (){
                     setState(() {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                     controller.alf();
                     });
 
 
